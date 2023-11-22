@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palliative Performance Scale</title>
+
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/foundation.min.css">
+  <script src="js/app.js"></script>
+
+  <!-- Include jQuery from a CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-ZyNbqUhqARtNjDVEEVD12SNi6p8q8TZQnJzxzqRYg2I4z1ugMvEKI3wGLOJ9ckHN" crossorigin="anonymous">
+
+
+  <!-- Include Foundation JS from a CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+        .slider-handle {
+      background-color: #fbcb79;
+      border: 2px solid #fff; /* Add border for better visibility */
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+    }
+
+    .output-display {
+      border-radius: 23px;
+      height: 45px;
+      width: 130px;
+      text-align: center;
+    }
+
+    #options {
+      display: none;
+    }
+
+    #options div:hover {
+    background-color: skyblue;
+    cursor: pointer;
+  }
+
+  @media (max-width: 600px) {
+  .output-display {
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    text-align: center;
+    margin-right: 80%
+  }
+
+  .slider-handle {
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    margin-left: 14px;
+  }
+
+  .yellow-dots-container{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%; /* Adjusted width to consider the margins */
+    margin-left: 0.5px;
+  }
+
+  #Main-Heading{
+    font-size: 40px;
+  }
+  #Below-Main-Heading-Text {
+    font-size: 40px;
+  }
+}
+  </style>
+ 
+</head>
+
+<body>
+  <div class="grid-container">
+    <div class="grid-x grid-padding-x">
+      <div class="medium-12 cell">
+        <h2 class="text-center" id="Main-Heading" style="color: #362f93;">Palliative Performance Scale</h2>
+        <h3 class="text-center" id="Below-Main-Heading-Text">
+          Use this tool to recognize functional decline quickly and inform
+          decisions about your patient's eligibility.
+        </h3>
+
+        <div class="drop_down" onclick="toggleOptions()">
+            <input type="text" onclick="updateTextbox('Choose a Diagnosis')" class="textBox" id="choose-a-Diagnosis-textbox" placeholder="Choose a Diagnosis" readonly value= "Choose a Diagnosis">
+          <div class="option" id="options">
+              <div style="background-color: #FBCB79;" class="choose-a-Diagnosis"><p id="choose-a-Diagnosis">Choose a Diagnosis</p></div>
+              <div class="i1" onclick="updateTextbox('ALS')"> <i class="fa-solid fa-circle" style="color: #0086db;"></i>ALS</div>
+              <div class="i2" onclick="updateTextbox('Alzheimer')"><i class="fa-solid fa-circle" style="color:#0097b7;"></i>Alzheimer's</div>
+              <div class="i3" onclick="updateTextbox('Cancer')"> <i class="fa-solid fa-circle" style="color:#479b99;"></i>Cancer</div>
+              <div class="i4" onclick="updateTextbox('Heart Disease')"><i class="fa-solid fa-circle" style="color: #b00d23;"></i>Heart Disease</div>
+              <div class="i5" onclick="updateTextbox('HIV and AIDS')"><i class="fa-solid fa-circle" style="color: #f9505b;"></i>HIV and AIDS</div>
+              <div class="i6" onclick="updateTextbox('Liver Disease')"><i class="fa-solid fa-circle" style="color: #e8b256;"></i>Liver Disease</div>
+              <div class="i7" onclick="updateTextbox('Lung Disease')"><i class="fa-solid fa-circle" style="color: #f2727f;"></i>Lung Disease</div>
+              <div class="i8" onclick="updateTextbox('Renal Disease')"><i class="fa-solid fa-circle" style="color: #5b7999;"></i>Renal Disease</div>
+              <div class="i9" onclick="updateTextbox('Sepsis')"><i class="fa-solid fa-circle" style="color: #a6539c;"></i>Sepsis</div>
+          </div>
+      </div>
+        <div>
+          <br />
+          <br />
+
+          <!-- slider sections  -->
+          <!-- Activity Slider -->
+          <h4>Ambulation</h4>
+          <h5 class="subheader" id="subheader_1" style="font-size: 21px;">Slide to see PPS Rating</h5>
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-10">
+              <div class="slider" id="slider_1" data-slider data-initial-start="0" data-step="10">
+                <span class="slider-handle" data-slider-handle role="slider" tabindex="1"
+                  aria-controls="sliderOutput1"></span>
+                <!-- Add yellow dots on the slider with an interval gap of 10 -->
+                <div class="yellow-dots-container"></div>
+              </div>
+            </div>
+            <div class="cell small-2">
+              <input class="output-display" type="number" readonly id="sliderOutput1" />
+            </div>
+          </div>
+          
+
+          <!-- Activity Slider -->
+          <h4>Activity</h4>
+          <h5 class="subheader" id="subheader_2" style="font-size: 21px;">Slide to see PPS Rating</h5>
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-10">
+              <div class="slider" id="slider_2" data-slider data-initial-start="0" data-step="10">
+                <span class="slider-handle" data-slider-handle role="slider" tabindex="1"
+                  aria-controls="sliderOutput2"></span>
+                <!-- Add yellow dots on the slider with an interval gap of 10 -->
+                <div class="yellow-dots-container"></div>
+              </div>
+            </div>
+            <div class="cell small-2">
+              <input class="output-display" type="number" readonly id="sliderOutput2" />
+            </div>
+          </div>
+
+          <!-- Evidence of Disease slider -->
+          <h4>Evidence of Disease</h4>
+          <h5 class="subheader" id="subheader_3" style="font-size: 21px;">Slide to see PPS Rating</h5>
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-10">
+              <div class="slider" id="slider_3" data-slider data-initial-start="0" data-step="10">
+                <span class="slider-handle" data-slider-handle role="slider" tabindex="1"
+                  aria-controls="sliderOutput3"></span>
+                <!-- Add yellow dots on the slider with an interval gap of 10 -->
+                <div class="yellow-dots-container"></div>
+              </div>
+            </div>
+            <div class="cell small-2">
+              <input class="output-display" type="number" readonly id="sliderOutput3" />
+            </div>
+          </div>
+
+          <!-- Self Care Slider -->
+          <h4>Self Care</h4>
+          <h5 class="subheader" id="subheader_4" style="font-size: 21px;">Slide to see PPS Rating</h5>
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-10">
+              <div class="slider" id="slider_4" data-slider data-initial-start="0" data-step="10">
+                <span class="slider-handle" data-slider-handle role="slider" tabindex="1"
+                  aria-controls="sliderOutput4"></span>
+                <!-- Add yellow dots on the slider with an interval gap of 10 -->
+                <div class="yellow-dots-container"></div>
+              </div>
+            </div>
+            <div class="cell small-2">
+              <input class="output-display" type="number" readonly id="sliderOutput4" />
+            </div>
+          </div>
+
+          <!-- Intake Slider  -->
+          <h4>Intake</h4>
+          <h5 class="subheader" id="subheader_5" style="font-size: 21px;">Slide to see PPS Rating</h5>
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-10">
+              <div class="slider" id="slider_5" data-slider data-initial-start="0" data-step="10">
+                <span class="slider-handle" data-slider-handle role="slider" tabindex="1"
+                  aria-controls="sliderOutput5"></span>
+                <!-- Add yellow dots on the slider with an interval gap of 10 -->
+                <div class="yellow-dots-container"></div>
+              </div>
+            </div>
+            <div class="cell small-2">
+              <input class="output-display" type="number" readonly id="sliderOutput5" />
+            </div>
+          </div>
+
+          <!-- Level of conciousness -->
+          <h4>Level of Consciousness</h4>
+          <h5 class="subheader" id="subheader_6" style="font-size: 21px;">Slide to see PPS Rating</h5>
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-10">
+              <div class="slider" id="slider_6" data-slider data-initial-start="0" data-step="10">
+                <span class="slider-handle" data-slider-handle role="slider" tabindex="1"
+                  aria-controls="sliderOutput6"></span>
+                <!-- Add yellow dots on the slider with an interval gap of 10 -->
+                <div class="yellow-dots-container"></div>
+              </div>
+            </div>
+            <div class="cell small-2">
+              <input class="output-display" type="number" readonly id="sliderOutput6" />
+            </div>
+          </div>
+
+          <!-- calculate button -->
+
+          <button class="button expanded" id="calculate_button">
+            CALCULATE
+          </button>
+        </div>
+      </div>
+    </div>
+    <br />
+    <!-- --------------------------------POPUP Start---------------------------------------------------------------- -->
+
+    <div id="successModal" class="reveal" data-reveal data-position="top">
+      <h1 class="SuccessModalHeading"></h1>
+      <p class="info-text"></p>
+      <button class="custom-button-success" type="button">START A REFERRAL</button>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+
+    <div id="errorModal" class="reveal" data-reveal data-position="top">
+      <h1 class="ErrorModalHeading"></h1>
+      <p class="info-text"></p>
+      <button class="custom-button-error" type="button">DIAGNOSIS GUIDELINES</button>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    <div id="Select-a-Diagnosis-Modal" class="reveal" data-reveal data-position="top">
+      <h1>Select a diagnosis and slide all Activities of Daily Living to view the PPS rating.</h1>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    
+    <!---------------------------------------POP End----------------------------------------------------------------------- -->
+  </div>
+
+
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/vendor/what-input.js"></script>
+  <script src="js/vendor/foundation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
